@@ -1,5 +1,8 @@
 package volley.android.sen.volleydemo;
 import android.content.Context;
+
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
@@ -43,7 +46,6 @@ public class ApiManager {
                  final Request originalRequest = chain.request();
                  final Request requestWithUserAgent = originalRequest.newBuilder()
                          .addHeader(HEADER_ACCEPT, HEADER_ACCEPT_JSON)
-                         .addHeader(HEADER_ACCEPT_ENCODING,ENCODING_GZIP)
                          .build();
                  Response response = chain.proceed(requestWithUserAgent);
                  return response;
@@ -52,7 +54,8 @@ public class ApiManager {
         //日志拦截 https://github.com/square/okhttp/wiki/Interceptors
         client.interceptors().add(new LoggingInterceptor());
         client.interceptors().add(new CacheInterceptor(mContext));
-
+        //开启Stetho，
+       // client.interceptors().add(new StethoInterceptor()); 方法废弃
         File cacheFile = new File(mContext.getCacheDir(), "[缓存目录]");
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 100); //100Mb
         client.setCache(cache);

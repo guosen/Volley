@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vPage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom">
+    </android.support.v4.view.ViewPager>
+    <RadioGroup
+        android:id="@+id/bottom"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:background="@android:color/darker_gray"
+        android:layout_alignParentBottom="true"
+        android:layout_height="45dp">
+
+        <RadioButton
+            android:id="@+id/rbHome"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:text="首页"
+            android:textColor="@color/rbselected"
+            android:checked="true"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/rbDisc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="发现"
+            android:gravity="center"
+            android:textColor="@color/rbselected"
+            android:layout_weight="1"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/rbMessge"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/rbselected"
+            android:text="消息"
+            android:button="@null"/>
+        <RadioButton
+            android:id="@+id/rbMe"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:textColor="@color/rbselected"
+            android:text="个人"
+            android:button="@null"/>
+
+    </RadioGroup>
+
+</RelativeLayout>

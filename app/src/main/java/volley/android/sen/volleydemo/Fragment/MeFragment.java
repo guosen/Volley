@@ -1,12 +1,15 @@
-package volley.android.sen.volleydemo;
+package volley.android.sen.volleydemo.Fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -15,12 +18,14 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit.Call;
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import volley.android.sen.volleydemo.R;
+import volley.android.sen.volleydemo.WebViewActivity;
 
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by shouwang on 16/4/12.
+ */
+public class MeFragment extends Fragment {
+    private View rootView;
     // 控制ToolBar的变量
     private static final float PERCENTAGE_TO_SHOW_TITLE_AT_TOOLBAR = 0.9f;
     private static final float PERCENTAGE_TO_HIDE_TITLE_DETAILS = 0.3f;
@@ -47,24 +52,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.main_tb_toolbar)
     Toolbar mTbToolbar; // 工具栏
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_main);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView=inflater.inflate(R.layout.layout_main,container,false);
+        return rootView;
+    }
 
-        Call<HttpResponse<UserInfo>> call=ApiManager.getInstance(this).getService().getUserInfo(91625, 0, 0);
-        call.enqueue(new Callback<HttpResponse<UserInfo>>() {
-            @Override
-            public void onFailure(Throwable t) {
-                Log.i("MainActivity",t.getMessage());
-            }
-
-            @Override
-            public void onResponse(Response<HttpResponse<UserInfo>> response, Retrofit retrofit) {
-               // Log.i("MainActivity",response.body().data.username+"    ++++++++++");
-            }
-        });
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this,view);
 
 
         mTbToolbar.setTitle("");
@@ -79,7 +77,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         initParallaxValues(); // 自动滑动效果
+
+        mIvPlaceholder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getActivity(), WebViewActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
+
+
+
+
 
     // 设置自动滑动的动画效果
     private void initParallaxValues() {
@@ -134,11 +146,5 @@ public class MainActivity extends AppCompatActivity {
         alphaAnimation.setDuration(duration);
         alphaAnimation.setFillAfter(true);
         v.startAnimation(alphaAnimation);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);
     }
 }

@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import volley.android.sen.volleydemo.Fragment.MeFragment;
+import volley.android.sen.volleydemo.Fragment.MessageFragment;
 
 /**
  * Created by shouwang on 16/4/12.
@@ -15,7 +16,8 @@ public class TabAdapter extends FragmentPagerAdapter {
     private final int  TAB_DISCOVER=1;
     private final int  TAB_MESSAGE=2;
     private final int  TAB_ME=3;
-    MeFragment mMeFragment;
+    MeFragment      mMeFragment;
+    MessageFragment mMessageFragment;
     public TabAdapter(FragmentManager fm){
         super(fm);
     }
@@ -32,6 +34,10 @@ public class TabAdapter extends FragmentPagerAdapter {
                 fragment=mMeFragment;
                 break;
             case TAB_MESSAGE:
+                if(mMessageFragment==null){
+                    mMessageFragment=new MessageFragment();
+                }
+                fragment=mMessageFragment;
                 break;
             case TAB_DISCOVER:
                 break;

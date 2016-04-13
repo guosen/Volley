@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -78,11 +79,10 @@ public class MeFragment extends Fragment {
 
         initParallaxValues(); // 自动滑动效果
 
-        mIvPlaceholder.setOnClickListener(new View.OnClickListener() {
+        mAblAppBar.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getActivity(), WebViewActivity.class);
-                startActivity(intent);
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return false;
             }
         });
     }
@@ -147,4 +147,5 @@ public class MeFragment extends Fragment {
         alphaAnimation.setFillAfter(true);
         v.startAnimation(alphaAnimation);
     }
+
 }

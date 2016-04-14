@@ -20,6 +20,8 @@ public class HttpResponse<T> implements Serializable {
     public Object metaData;
 
     public T data;
+    public T results;
+    public String error;
 
     public static class MetaData {
         @SerializedName("total_count")

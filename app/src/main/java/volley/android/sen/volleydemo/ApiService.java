@@ -29,4 +29,9 @@ public interface ApiService {
           @Path("page") int page
     );
 
+    @GET("data/福利/30/{page}")
+    Call<HttpResponse<List<GanHuoData>>>getFuLi(
+      @Path("page") int page
+    );
+
 }

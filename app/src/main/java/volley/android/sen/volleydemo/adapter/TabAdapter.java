@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import volley.android.sen.volleydemo.Fragment.ImageStaggeFragment;
 import volley.android.sen.volleydemo.Fragment.MeFragment;
 import volley.android.sen.volleydemo.Fragment.MessageFragment;
 
@@ -18,6 +19,7 @@ public class TabAdapter extends FragmentPagerAdapter {
     private final int  TAB_ME=3;
     MeFragment      mMeFragment;
     MessageFragment mMessageFragment;
+    ImageStaggeFragment mImageStaggeFragment;
     public TabAdapter(FragmentManager fm){
         super(fm);
     }
@@ -40,6 +42,10 @@ public class TabAdapter extends FragmentPagerAdapter {
                 fragment=mMessageFragment;
                 break;
             case TAB_DISCOVER:
+                if(mImageStaggeFragment==null){
+                    mImageStaggeFragment=new ImageStaggeFragment();
+                }
+                fragment=mImageStaggeFragment;
                 break;
         }
         return fragment;
